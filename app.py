@@ -1,11 +1,14 @@
 from PIL import ImageDraw
 import gradio as gr
 
+from TraceLength import cal_trace_length
 
 MARGIN = 20
 
 
 def annotate_image(image):
+    if image is None:
+        return None
     annotated = image.copy()
     draw = ImageDraw.Draw(annotated)
     width, height = annotated.size
@@ -13,7 +16,16 @@ def annotate_image(image):
     top_left = (MARGIN, MARGIN)
     bottom_right = (MARGIN + box_size, MARGIN + box_size)
     draw.rectangle([top_left, bottom_right], outline="red", width=4)
+    try:
+        trace_length = cal_trace_length(image)
+    except Exception:
+        trace_length = "N/A"
     draw.text((MARGIN, MARGIN + 10 + box_size), "Annotated", fill="red")
+    draw.text(
+        (MARGIN, MARGIN + 30 + box_size),
+        f"Trace length: {trace_length} px",
+        fill="red",
+    )
     return annotated
 
 

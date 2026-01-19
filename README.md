@@ -4,7 +4,7 @@ MATLAB source code lives in `TraceLength/`.
 
 ## Python Gradio demo
 
-A minimal Python demo is included to upload an image and return an annotated version.
+A minimal Python demo is included to upload an image, estimate trace length, and return an annotated version.
 
 ### Setup (uv)
 
